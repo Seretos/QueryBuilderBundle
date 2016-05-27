@@ -98,3 +98,11 @@ $andExpression->add($orExpression);
 $builder->andWhere($andExpression);
 $andExpression->__toString(); // col1 = :col1 AND col2 LIKE :col2 AND (col3 = :col3 OR col4 = :col4)
 ```
+
+Road map
+========
+the following features are not implemented but required for version 1.0
+
+* functions:
+    * GROUP_CONCAT
+    * IF
