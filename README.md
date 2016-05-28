@@ -1,6 +1,6 @@
 QueryBuilderBundle
 ==================
-This bundle provide an abstraction layer for mysql database queries
+this bundle provide an abstraction layer for mysql database queries
 
 Installation
 ============
