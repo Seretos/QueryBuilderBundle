@@ -106,3 +106,4 @@ the following features are not implemented but required for version 1.0
 * functions:
     * GROUP_CONCAT
     * IF
+* get the expression count (AbstractExpression)
