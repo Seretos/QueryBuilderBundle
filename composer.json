@@ -1,5 +1,5 @@
 {
-  "name": "Seretos/database/QueryBuilderBundle",
+  "name": "LimetecBiotechnologies/database/QueryBuilderBundle",
   "description": "this bundle provide an abstraction layer for mysql database queries",
   "keywords": [
     "mysqli",
