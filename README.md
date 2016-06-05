@@ -97,8 +97,3 @@ the following features are not implemented but required for version 1.0
 * functions:
     * GROUP_CONCAT
     * IF
-<<<<<<< HEAD
-* get the expression count (AbstractExpression)
-* andWhere/orWhere without where
-=======
->>>>>>> many database bundle bugfixes and refactoring
