@@ -94,6 +94,7 @@ Road map
 ========
 the following features are not implemented but required for version 1.0
 
+* join with using
 * functions:
     * GROUP_CONCAT
     * IF
