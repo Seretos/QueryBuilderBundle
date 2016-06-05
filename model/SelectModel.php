@@ -11,7 +11,7 @@ namespace database\QueryBuilderBundle\model;
 
 class SelectModel {
     /**
-     * @var array
+     * @var string[]
      */
     private $columns;
 

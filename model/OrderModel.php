@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class OrderModel {
+    /**
+     * @var array
+     */
     private $orders;
 
     /**

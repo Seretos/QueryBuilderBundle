@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class WhereModel {
+    /**
+     * @var string[]
+     */
     private $conditions;
 
     /**

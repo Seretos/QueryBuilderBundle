@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class GroupModel {
+    /**
+     * @var string[]
+     */
     private $conditions;
 
     /**

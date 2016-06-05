@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class UpdateModel {
+    /**
+     * @var string
+     */
     private $table;
 
     /**

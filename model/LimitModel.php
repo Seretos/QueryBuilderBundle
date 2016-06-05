@@ -10,7 +10,13 @@ namespace database\QueryBuilderBundle\model;
 
 
 class LimitModel {
+    /**
+     * @var int
+     */
     private $limit;
+    /**
+     * @var int
+     */
     private $offset;
 
     /**

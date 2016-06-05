@@ -29,8 +29,17 @@ class Comparison {
                                        self::COMPARISON_TYPE_ISNULL => 'IS NULL',
                                        self::COMPARISON_TYPE_ISNOTNULL => 'IS NOT NULL'];
 
+    /**
+     * @var string
+     */
     private $source;
+    /**
+     * @var null|string
+     */
     private $target;
+    /**
+     * @var null|string
+     */
     private $type;
 
     /**

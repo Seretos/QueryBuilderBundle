@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class JoinModel {
+    /**
+     * @var array
+     */
     private $joins;
 
     /**

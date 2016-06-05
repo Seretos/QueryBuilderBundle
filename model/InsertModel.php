@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class InsertModel {
+    /**
+     * @var string
+     */
     private $table;
 
     /**

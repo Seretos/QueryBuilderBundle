@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class HavingModel {
+    /**
+     * @var string[]
+     */
     private $conditions;
 
     /**

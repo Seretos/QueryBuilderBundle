@@ -414,13 +414,6 @@ class QueryBuilder {
         return $this->parameters;
     }
 
-//    /**
-//     * @return Query
-//     */
-//    public function buildQuery () {
-//        return $this->factory->createQuery($this, $this->parameters);
-//    }
-
     /**
      * @return string
      * @throws QueryBuilderException

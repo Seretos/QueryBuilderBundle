@@ -10,6 +10,9 @@ namespace database\QueryBuilderBundle\model;
 
 
 class ValuesModel {
+    /**
+     * @var array
+     */
     private $values;
 
     /**

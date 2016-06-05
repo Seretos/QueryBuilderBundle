@@ -13,16 +13,25 @@ use database\QueryBuilderBundle\builder\ExpressionBuilder;
 use database\QueryBuilderBundle\builder\QueryBuilder;
 
 class QueryBuilderBundleFactory {
+    /**
+     * @var QueryBuilderFactory
+     */
     private $factory;
 
     public function __construct () {
         $this->factory = new QueryBuilderFactory();
     }
 
+    /**
+     * @return QueryBuilder
+     */
     public function createQueryBuilder () {
         return new QueryBuilder($this->factory);
     }
 
+    /**
+     * @return ExpressionBuilder
+     */
     public function createExpressionBuilder () {
         return new ExpressionBuilder();
     }

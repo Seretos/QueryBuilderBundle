@@ -1,12 +1,12 @@
 
 
 Code Coverage Report:       
-  2016-06-05 04:07:58       
+  2016-06-05 10:40:46       
                             
  Summary:                   
   Classes: 100.00% (23/23)  
-  Methods: 100.00% (122/122)
-  Lines:   100.00% (377/377)
+  Methods: 100.00% (123/123)
+  Lines:   100.00% (378/378)
 
 \database\QueryBuilderBundle\builder::ExpressionBuilder
   Methods: 100.00% (12/12)   Lines: 100.00% ( 18/ 18)
@@ -15,7 +15,7 @@ Code Coverage Report:
 \database\QueryBuilderBundle\comparison::Comparison
   Methods: 100.00% ( 7/ 7)   Lines: 100.00% ( 18/ 18)
 \database\QueryBuilderBundle\expression::AbstractExpression
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 17/ 17)
+  Methods: 100.00% ( 5/ 5)   Lines: 100.00% ( 18/ 18)
 \database\QueryBuilderBundle\expression::AndExpression
   Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
 \database\QueryBuilderBundle\expression::OrExpression

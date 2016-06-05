@@ -10,7 +10,13 @@ namespace database\QueryBuilderBundle\model;
 
 
 class FromModel {
+    /**
+     * @var string
+     */
     private $table;
+    /**
+     * @var string
+     */
     private $alias;
 
     /**

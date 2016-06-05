@@ -10,7 +10,13 @@ namespace database\QueryBuilderBundle\functions;
 
 
 class InFunction {
+    /**
+     * @var string
+     */
     private $source;
+    /**
+     * @var string
+     */
     private $target;
 
     /**
