@@ -1,52 +1,54 @@
-
-
-Code Coverage Report:       
-  2016-05-28 00:02:01       
-                            
- Summary:                   
-  Classes: 100.00% (22/22)  
-  Methods: 100.00% (120/120)
-  Lines:   100.00% (371/371)
-
-\database\QueryBuilderBundle\builder::QueryBuilder
-  Methods: 100.00% (34/34)   Lines: 100.00% (144/144)
-\database\QueryBuilderBundle\comparison::Comparison
-  Methods: 100.00% ( 7/ 7)   Lines: 100.00% ( 18/ 18)
-\database\QueryBuilderBundle\expression::AbstractExpression
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 17/ 17)
-\database\QueryBuilderBundle\expression::AndExpression
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
-\database\QueryBuilderBundle\expression::Expression
-  Methods: 100.00% (12/12)   Lines: 100.00% ( 18/ 18)
-\database\QueryBuilderBundle\expression::OrExpression
-  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
-\database\QueryBuilderBundle\factory::QueryBuilderFactory
-  Methods: 100.00% (14/14)   Lines: 100.00% ( 34/ 34)
-\database\QueryBuilderBundle\functions::InFunction
-  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  5/  5)
-\database\QueryBuilderBundle\functions::LikeFunction
-  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  5/  5)
-\database\QueryBuilderBundle\model::DeleteModel
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  5/  5)
-\database\QueryBuilderBundle\model::FromModel
-  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  5/  5)
-\database\QueryBuilderBundle\model::GroupModel
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 11/ 11)
-\database\QueryBuilderBundle\model::HavingModel
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 11/ 11)
-\database\QueryBuilderBundle\model::InsertModel
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  5/  5)
-\database\QueryBuilderBundle\model::JoinModel
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 17/ 17)
-\database\QueryBuilderBundle\model::LimitModel
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 15/ 15)
-\database\QueryBuilderBundle\model::OrderModel
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 15/ 15)
-\database\QueryBuilderBundle\model::SelectModel
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 12/ 12)
-\database\QueryBuilderBundle\model::UpdateModel
-  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  6/  6)
-\database\QueryBuilderBundle\model::ValuesModel
-  Methods: 100.00% ( 6/ 6)   Lines: 100.00% ( 12/ 12)
-\database\QueryBuilderBundle\model::WhereModel
-  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 11/ 11)
+
+
+Code Coverage Report:       
+  2016-06-05 04:07:58       
+                            
+ Summary:                   
+  Classes: 100.00% (23/23)  
+  Methods: 100.00% (122/122)
+  Lines:   100.00% (377/377)
+
+\database\QueryBuilderBundle\builder::ExpressionBuilder
+  Methods: 100.00% (12/12)   Lines: 100.00% ( 18/ 18)
+\database\QueryBuilderBundle\builder::QueryBuilder
+  Methods: 100.00% (34/34)   Lines: 100.00% (150/150)
+\database\QueryBuilderBundle\comparison::Comparison
+  Methods: 100.00% ( 7/ 7)   Lines: 100.00% ( 18/ 18)
+\database\QueryBuilderBundle\expression::AbstractExpression
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 17/ 17)
+\database\QueryBuilderBundle\expression::AndExpression
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\database\QueryBuilderBundle\expression::OrExpression
+  Methods: 100.00% ( 1/ 1)   Lines: 100.00% (  1/  1)
+\database\QueryBuilderBundle\factory::QueryBuilderBundleFactory
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  4/  4)
+\database\QueryBuilderBundle\factory::QueryBuilderFactory
+  Methods: 100.00% (12/12)   Lines: 100.00% ( 29/ 29)
+\database\QueryBuilderBundle\functions::InFunction
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  5/  5)
+\database\QueryBuilderBundle\functions::LikeFunction
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  5/  5)
+\database\QueryBuilderBundle\model::DeleteModel
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  5/  5)
+\database\QueryBuilderBundle\model::FromModel
+  Methods: 100.00% ( 2/ 2)   Lines: 100.00% (  5/  5)
+\database\QueryBuilderBundle\model::GroupModel
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 11/ 11)
+\database\QueryBuilderBundle\model::HavingModel
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 11/ 11)
+\database\QueryBuilderBundle\model::InsertModel
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  5/  5)
+\database\QueryBuilderBundle\model::JoinModel
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 17/ 17)
+\database\QueryBuilderBundle\model::LimitModel
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 15/ 15)
+\database\QueryBuilderBundle\model::OrderModel
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% ( 15/ 15)
+\database\QueryBuilderBundle\model::SelectModel
+  Methods: 100.00% ( 4/ 4)   Lines: 100.00% ( 12/ 12)
+\database\QueryBuilderBundle\model::UpdateModel
+  Methods: 100.00% ( 3/ 3)   Lines: 100.00% (  6/  6)
+\database\QueryBuilderBundle\model::ValuesModel
+  Methods: 100.00% ( 6/ 6)   Lines: 100.00% ( 12/ 12)
+\database\QueryBuilderBundle\model::WhereModel
+  Methods: 100.00% ( 5/ 5)   Lines: 100.00% ( 12/ 12)

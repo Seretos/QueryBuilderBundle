@@ -1,5 +1,5 @@
 <?php
-use database\QueryBuilderBundle\expression\Expression;
+use database\QueryBuilderBundle\builder\ExpressionBuilder;
 
 /**
  * Created by PhpStorm.
@@ -9,12 +9,12 @@ use database\QueryBuilderBundle\expression\Expression;
  */
 class ExpressionFunctionalTest extends PHPUnit_Framework_TestCase {
     /**
-     * @var Expression
+     * @var ExpressionBuilder
      */
     private $expression;
 
     protected function setUp () {
-        $this->expression = new Expression();
+        $this->expression = new ExpressionBuilder();
     }
 
     /**

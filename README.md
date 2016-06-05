@@ -9,22 +9,12 @@ add the bundle in your composer.json as bellow:
 "require": {
     ...
     ,"Seretos/database/QueryBuilderBundle" : "v0.1.*"
-    ,"Seretos/database/QueryBundle" : "v0.1.*"
-    ,"Seretos/database/DriverBundle" : "v0.1.*"
 },
 "repositories" : [
     ...
     ,{
         "type" : "git",
         "url" : "https://github.com/Seretos/QueryBuilderBundle"
-    }
-    ,{
-         "type" : "git",
-         "url" : "https://github.com/Seretos/QueryBundle"
-    }
-    ,{
-         "type" : "git",
-         "url" : "https://github.com/Seretos/DriverBundle"
     }
 ]
 ```
@@ -34,11 +24,11 @@ Usage
 =====
 create the query builder factory with your [driver bundle connection](https://github.com/Seretos/DriverBundle)
 ```php
-$queryBuilderFactory = new QueryBuilderFactory($this->connection);
+$queryBuilderFactory = new QueryBuilderBundleFactory($this->connection);
 ```
 now create the query builder for your query
 ```php
-$builder = new QueryBuilder($queryBuilderFactory);
+$builder = $queryBuilderFactory->createQueryBuilder();
 ```
 
 ## select
@@ -77,9 +67,10 @@ $builder->delete('example1')
         ->where('id = :id');
 ```
 
-# execute the query
+# execute the query 
+[query bundle](https://github.com/Seretos/QueryBundle)
 ```php
-$query = $builder->buildQuery();
+$query = $queryFactory->createQuery($builder->__toString(),$builder->getParameters());
 $query->setParameter('id',$id);
 $result = $query->buildResult();
 ```
@@ -87,12 +78,12 @@ $result = $query->buildResult();
 # expression builder
 if you want to create complex query expressions, it is a better way to create the expression with the builder instead as string
 ```php
-$expression = new Expression();
-$andExpression = $expression->andX($expression->eq('col1',':col1'));
-$orExpression = $expression->orX($expression->eq('col3',':col3')
-                                ,$expression->like('col4',':col4'));
+$expressionBuilder = $queryBuilderFactory->createExpressionBuilder();
+$andExpression = $expressionBuilder->andX($expressionBuilder->eq('col1',':col1'));
+$orExpression = $expressionBuilder->orX($expressionBuilder->eq('col3',':col3')
+                                ,$expressionBuilder->like('col4',':col4'));
 
-$andExpression->add($expression->like('col2',':col2');
+$andExpression->add($expressionBuilder->like('col2',':col2');
 $andExpression->add($orExpression);
 
 $builder->andWhere($andExpression);
@@ -106,5 +97,8 @@ the following features are not implemented but required for version 1.0
 * functions:
     * GROUP_CONCAT
     * IF
+<<<<<<< HEAD
 * get the expression count (AbstractExpression)
 * andWhere/orWhere without where
+=======
+>>>>>>> many database bundle bugfixes and refactoring

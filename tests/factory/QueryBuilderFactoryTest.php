@@ -1,6 +1,5 @@
 <?php
 use database\DriverBundle\connection\interfaces\ConnectionInterface;
-use database\QueryBuilderBundle\builder\QueryBuilder;
 use database\QueryBuilderBundle\factory\QueryBuilderFactory;
 use database\QueryBuilderBundle\model\DeleteModel;
 use database\QueryBuilderBundle\model\FromModel;
@@ -14,9 +13,6 @@ use database\QueryBuilderBundle\model\SelectModel;
 use database\QueryBuilderBundle\model\UpdateModel;
 use database\QueryBuilderBundle\model\ValuesModel;
 use database\QueryBuilderBundle\model\WhereModel;
-use database\QueryBundle\factory\QueryFactory;
-use database\QueryBundle\parameter\StringParameter;
-use database\QueryBundle\query\Query;
 
 /**
  * Created by PhpStorm.
@@ -35,59 +31,11 @@ class QueryBuilderFactoryTest extends PHPUnit_Framework_TestCase {
      */
     private $mockConnection;
 
-    /**
-     * @var ReflectionProperty
-     */
-    private $queryFactoryProperty;
-
     protected function setUp () {
         $this->mockConnection = $this->getMockBuilder(ConnectionInterface::class)
                                      ->disableOriginalConstructor()
                                      ->getMock();
         $this->factory = new QueryBuilderFactory($this->mockConnection);
-
-        $factoryReflection = new ReflectionClass(QueryBuilderFactory::class);
-        $this->queryFactoryProperty = $factoryReflection->getProperty('queryFactory');
-        $this->queryFactoryProperty->setAccessible(true);
-    }
-
-    /**
-     * @test
-     */
-    public function queryFactory () {
-        /* @var $queryFactory QueryFactory */
-        $queryFactory = $this->queryFactoryProperty->getValue($this->factory);
-        $this->assertInstanceOf(QueryFactory::class, $queryFactory);
-        $this->assertSame($this->mockConnection, $queryFactory->getConnection());
-    }
-
-    /**
-     * @test
-     */
-    public function createQuery () {
-        /* @var $mockBuilder QueryBuilder|PHPUnit_Framework_MockObject_MockObject */
-        $mockBuilder = $this->getMockBuilder(QueryBuilder::class)
-                            ->disableOriginalConstructor()
-                            ->getMock();
-
-        $mockBuilder->expects($this->once())
-                    ->method('__toString')
-                    ->will($this->returnValue('example sql'));
-
-        $queryReflection = new ReflectionClass(Query::class);
-        $queryFactoryProperty = $queryReflection->getProperty('factory');
-        $queryFactoryProperty->setAccessible(true);
-        $queryParametersProperty = $queryReflection->getProperty('parameters');
-        $queryParametersProperty->setAccessible(true);
-
-        $query = $this->factory->createQuery($mockBuilder, ['param1' => 'value1']);
-
-        $this->assertInstanceOf(Query::class, $query);
-        $this->assertSame('example sql', $query->getSql());
-        $this->assertSame($this->queryFactoryProperty->getValue($this->factory),
-                          $queryFactoryProperty->getValue($query));
-        $this->assertInstanceOf(StringParameter::class,
-                                $queryParametersProperty->getValue($query)['param1']);
     }
 
     /**

@@ -1,7 +1,7 @@
 <?php
+use database\QueryBuilderBundle\builder\ExpressionBuilder;
 use database\QueryBuilderBundle\comparison\Comparison;
 use database\QueryBuilderBundle\expression\AndExpression;
-use database\QueryBuilderBundle\expression\Expression;
 use database\QueryBuilderBundle\expression\OrExpression;
 use database\QueryBuilderBundle\functions\InFunction;
 use database\QueryBuilderBundle\functions\LikeFunction;
@@ -12,14 +12,14 @@ use database\QueryBuilderBundle\functions\LikeFunction;
  * Date: 01.05.2016
  * Time: 18:59
  */
-class ExpressionTest extends PHPUnit_Framework_TestCase {
+class ExpressionBuilderTest extends PHPUnit_Framework_TestCase {
     /**
-     * @var Expression
+     * @var ExpressionBuilder
      */
     private $expression;
 
     protected function setUp () {
-        $this->expression = new Expression();
+        $this->expression = new ExpressionBuilder();
     }
 
     /**

@@ -6,14 +6,16 @@
  * Time: 18:24
  */
 
-namespace database\QueryBuilderBundle\expression;
+namespace database\QueryBuilderBundle\builder;
 
 
 use database\QueryBuilderBundle\comparison\Comparison;
+use database\QueryBuilderBundle\expression\AndExpression;
+use database\QueryBuilderBundle\expression\OrExpression;
 use database\QueryBuilderBundle\functions\InFunction;
 use database\QueryBuilderBundle\functions\LikeFunction;
 
-class Expression {
+class ExpressionBuilder {
     /**
      * @param string|null $condition1
      * @param string|null $condition2

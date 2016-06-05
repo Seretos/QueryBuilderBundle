@@ -10,18 +10,24 @@ namespace database\QueryBuilderBundle\tests;
 
 
 use database\DriverBundle\tests\AbstractFunctionalDatabaseTest;
+use database\QueryBuilderBundle\builder\ExpressionBuilder;
 use database\QueryBuilderBundle\builder\QueryBuilder;
-use database\QueryBuilderBundle\expression\Expression;
-use database\QueryBuilderBundle\factory\QueryBuilderFactory;
+use database\QueryBuilderBundle\factory\QueryBuilderBundleFactory;
+use database\QueryBundle\factory\QueryBundleFactory;
 
 abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalDatabaseTest {
     /**
-     * @var QueryBuilderFactory
+     * @var QueryBundleFactory
+     */
+    protected $queryFactory;
+
+    /**
+     * @var QueryBuilderBundleFactory
      */
     protected $queryBuilderFactory;
 
     /**
-     * @var Expression
+     * @var ExpressionBuilder
      */
     private $expression;
 
@@ -54,14 +60,15 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
         $this->pdo->exec('INSERT INTO example4(info,example3_id) VALUES(\'test1\',1)');
         $this->pdo->exec('INSERT INTO example4(info,example3_id) VALUES(\'test1\',1)');
 
-        $this->expression = new Expression();
+        $this->queryBuilderFactory = new QueryBuilderBundleFactory();
+        $this->expression = new ExpressionBuilder();
     }
 
     /**
      * @return QueryBuilder
      */
     protected function createQueryBuilder () {
-        $builder = new QueryBuilder($this->queryBuilderFactory);
+        $builder = $this->queryBuilderFactory->createQueryBuilder();
 
         return $builder;
     }
@@ -78,7 +85,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->select(['e1.info'])
                              ->from('example1', 'e1');
 
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('SELECT e1.info FROM example1 e1 ', $query->getSql());
         $result = $query->buildResult();
         for ($i = 0; $i < 50; $i++) {
@@ -98,7 +105,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->leftJoin('example1', 'e1', 'WITH', 'e1.id = e3.example1_id')
                              ->join('example4', 'e4', 'WITH', 'e4.example3_id = e3.id', 'LEFT OUTER');
 
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('SELECT e3.id, e3.info AS info3,e1.info AS info1 FROM example3 e3 INNER JOIN example2 AS e2 ON e2.id = e3.example2_id LEFT JOIN example1 AS e1 ON e1.id = e3.example1_id LEFT OUTER JOIN example4 AS e4 ON e4.example3_id = e3.id ',
                           $query->getSql());
         $result = $query->buildResult();
@@ -121,7 +128,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->orWhere($this->expr()
                                             ->andX('e1.id = 3', 'e1.info <> :info1'));
 
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $query->setParameter('info1', 'test1');
         $query->setParameter('info2', 'test2');
         $this->assertSame('SELECT e1.info FROM example1 e1 WHERE e1.info = :info1 AND e1.info LIKE :info2 OR (e1.id = 3 AND e1.info <> :info1 ) ',
@@ -141,7 +148,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->select('e4.info')
                              ->from('example4', 'e4')
                              ->groupBy('e4.info');
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('SELECT e4.info FROM example4 e4 GROUP BY e4.info ', $query->getSql());
         $result = $query->buildResult();
         $this->assertSame([['info' => 'test1'], ['info' => 'test2']], iterator_to_array($result));
@@ -158,7 +165,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->having('id < 10')
                              ->andHaving('info = :info1')
                              ->orHaving('info = :info2');
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $query->setParameter('info1', 'test1');
         $query->setParameter('info2', 'test2');
         $this->assertSame('SELECT e1.info,e1.id FROM example1 e1 GROUP BY e1.info,e1.id HAVING id < 10 AND info = :info1 OR info = :info2 ',
@@ -181,7 +188,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->orderBy('e4.info', 'DESC')
                              ->addOrderBy(['e4.id'], 'ASC');
 
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('SELECT e4.info,e4.id FROM example4 e4 ORDER BY e4.info DESC ,e4.id ASC ', $query->getSql());
         $result = $query->buildResult();
         $this->assertEquals([
@@ -202,7 +209,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->from('example1', 'e1')
                              ->setFirstResult(2)
                              ->setMaxResult(3);
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('SELECT * FROM example1 e1 LIMIT 2,3 ', $query->getSql());
         $result = $query->buildResult();
         $this->assertEquals([
@@ -226,7 +233,7 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->from('example1', 'e1')
                              ->where($this->expr()
                                           ->in('e1.id', $example3Builder));
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('SELECT * FROM example1 e1 WHERE e1.id IN(SELECT e3.example1_id FROM example3 e3 ) ',
                           $query->getSql());
         $result = $query->buildResult();
@@ -244,18 +251,18 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
         $queryBuilder = $this->createQueryBuilder()
                              ->insert('example1')
                              ->set(['info' => 'inserted']);
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('INSERT INTO example1 (info) VALUES(:info) ', $query->getSql());
         $result = $query->buildResult();
         $this->assertSame(1, $result->rowCount());
 
-        $validate = $this->createQueryBuilder()
-                         ->select('e1.id,e1.info')
-                         ->from('example1', 'e1')
-                         ->where('info = :info')
-                         ->buildQuery()
-                         ->setParameter('info', 'inserted')
-                         ->buildResult();
+        $secondBuilder = $this->createQueryBuilder()
+                              ->select('e1.id,e1.info')
+                              ->from('example1', 'e1')
+                              ->where('info = :info');
+        $secondQuery = $this->queryFactory->createQuery($secondBuilder->__toString(), $secondBuilder->getParameters());
+        $validate = $secondQuery->setParameter('info', 'inserted')
+                                ->buildResult();
         $this->assertEquals([['id' => '51', 'info' => 'inserted']], iterator_to_array($validate));
     }
 
@@ -267,17 +274,17 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
                              ->update('example1')
                              ->set(['info' => 'updated'])
                              ->where('id < 4');
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('UPDATE example1 SET info = :info WHERE id < 4 ', $query->getSql());
         $result = $query->buildResult();
         $this->assertSame(3, $result->rowCount());
 
-        $validate = $this->createQueryBuilder()
-                         ->select('e1.id,e1.info')
-                         ->from('example1', 'e1')
-                         ->where('e1.id < 5')
-                         ->buildQuery()
-                         ->buildResult();
+        $secondBuilder = $this->createQueryBuilder()
+                              ->select('e1.id,e1.info')
+                              ->from('example1', 'e1')
+                              ->where('e1.id < 5');
+        $secondQuery = $this->queryFactory->createQuery($secondBuilder->__toString(), $secondBuilder->getParameters());
+        $validate = $secondQuery->buildResult();
         $this->assertEquals([['id' => '1', 'info' => 'updated'],
                              ['id' => '2', 'info' => 'updated'],
                              ['id' => '3', 'info' => 'updated'],
@@ -294,17 +301,17 @@ abstract class AbstractFunctionalQueryBuilderTest extends AbstractFunctionalData
         $queryBuilder = $this->createQueryBuilder()
                              ->delete('example4')
                              ->where('id < 3');
-        $query = $queryBuilder->buildQuery();
+        $query = $this->queryFactory->createQuery($queryBuilder->__toString(), $queryBuilder->getParameters());
         $this->assertSame('DELETE FROM example4 WHERE id < 3 ', $query->getSql());
         $result = $query->buildResult();
         $this->assertSame(2, $result->rowCount());
 
-        $validate = $this->createQueryBuilder()
-                         ->select('e4.id,e4.info')
-                         ->from('example4', 'e4')
-                         ->where('e4.id < 4')
-                         ->buildQuery()
-                         ->buildResult();
+        $secondBuilder = $this->createQueryBuilder()
+                              ->select('e4.id,e4.info')
+                              ->from('example4', 'e4')
+                              ->where('e4.id < 4');
+        $secondQuery = $this->queryFactory->createQuery($secondBuilder->__toString(), $secondBuilder->getParameters());
+        $validate = $secondQuery->buildResult();
         $this->assertEquals([['id' => '3', 'info' => 'test2']],
                             iterator_to_array($validate));
     }

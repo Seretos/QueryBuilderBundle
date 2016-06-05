@@ -14,7 +14,7 @@
         </testsuite>
         <testsuite name="query builder functional tests">
             <file>tests/MysqliFunctionalQueryBuilderTest.php</file>
-            <file>tests/PDOFunctionalQueryBuilderTest.php</file>
+            <file>tests/PdoFunctionalQueryBuilderTest.php</file>
             <file>tests/ExpressionFunctionalTest.php</file>
         </testsuite>
     </testsuites>

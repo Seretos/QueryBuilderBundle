@@ -1,0 +1,20 @@
+{
+  "source": {
+    "directories": [
+      "database/QueryBuilderBundle/builder",
+      "database/QueryBuilderBundle/comparison",
+      "database/QueryBuilderBundle/exception",
+      "database/QueryBuilderBundle/expression",
+      "database/QueryBuilderBundle/factory",
+      "database/QueryBuilderBundle/functions",
+      "database/QueryBuilderBundle/model"
+    ],
+    "excludes": [
+      "tests"
+    ]
+  },
+  "timeout": 40,
+  "logs": {
+    "text": "humbuglog.txt"
+  }
+}

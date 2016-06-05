@@ -23,12 +23,21 @@ class AbstractExpressionTest extends PHPUnit_Framework_TestCase {
      */
     private $conditionProperty;
 
-    public function setUp () {
+    protected function setUp () {
         $this->expression = $this->getMockForAbstractClass(AbstractExpression::class);
 
         $this->expressionReflection = new ReflectionClass(AbstractExpression::class);
         $this->conditionProperty = $this->expressionReflection->getProperty('conditions');
         $this->conditionProperty->setAccessible(true);
+    }
+
+    /**
+     * @test
+     */
+    public function countMethod () {
+        $this->assertSame(0, $this->expression->count());
+        $this->expression->add('test');
+        $this->assertSame(1, $this->expression->count());
     }
 
     /**

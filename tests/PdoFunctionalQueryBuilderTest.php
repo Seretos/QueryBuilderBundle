@@ -1,7 +1,7 @@
 <?php
 use database\DriverBundle\connection\pdo\PdoConnection;
-use database\QueryBuilderBundle\factory\QueryBuilderFactory;
 use database\QueryBuilderBundle\tests\AbstractFunctionalQueryBuilderTest;
+use database\QueryBundle\factory\QueryBundleFactory;
 
 /**
  * Created by PhpStorm.
@@ -17,6 +17,6 @@ class PdoFunctionalQueryBuilderTest extends AbstractFunctionalQueryBuilderTest {
                                               self::CONFIG['password'],
                                               self::CONFIG['database']);
 
-        $this->queryBuilderFactory = new QueryBuilderFactory($this->connection);
+        $this->queryFactory = new QueryBundleFactory($this->connection);
     }
 }

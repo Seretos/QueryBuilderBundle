@@ -374,10 +374,17 @@ class QueryBuilderTest extends PHPUnit_Framework_TestCase {
                           ->will($this->returnValue($whereModelMock));
 
         $whereModelMock->expects($this->at(0))
-                       ->method('add')
-                       ->with('AND e1.id = 1');
+                       ->method('count')
+                       ->will($this->returnValue(0));
 
         $whereModelMock->expects($this->at(1))
+                       ->method('add')
+                       ->with('e1.id = 1');
+
+        $whereModelMock->expects($this->at(2))
+                       ->method('count')
+                       ->will($this->returnValue(1));
+        $whereModelMock->expects($this->at(3))
                        ->method('add')
                        ->with('AND e2.id = 2');
 
@@ -398,10 +405,17 @@ class QueryBuilderTest extends PHPUnit_Framework_TestCase {
                           ->will($this->returnValue($whereModelMock));
 
         $whereModelMock->expects($this->at(0))
-                       ->method('add')
-                       ->with('OR e1.id = 1');
+                       ->method('count')
+                       ->will($this->returnValue(0));
 
         $whereModelMock->expects($this->at(1))
+                       ->method('add')
+                       ->with('e1.id = 1');
+
+        $whereModelMock->expects($this->at(2))
+                       ->method('count')
+                       ->will($this->returnValue(1));
+        $whereModelMock->expects($this->at(3))
                        ->method('add')
                        ->with('OR e2.id = 2');
 
@@ -610,22 +624,6 @@ class QueryBuilderTest extends PHPUnit_Framework_TestCase {
         $this->assertSame($this->builder, $this->builder->set(['param1' => 'value1', 'param2' => 'value2']));
         $this->assertSame(['param1' => 'value1', 'param2' => 'value2'],
                           $this->parametersProperty->getValue($this->builder));
-    }
-
-    /**
-     * @test
-     */
-    public function buildQuery () {
-        $parameters = ['test1'];
-
-        $this->mockFactory->expects($this->once())
-                          ->method('createQuery')
-                          ->with($this->builder, $parameters)
-                          ->will($this->returnValue('success'));
-
-        $this->parametersProperty->setValue($this->builder, $parameters);
-
-        $this->assertSame('success', $this->builder->buildQuery());
     }
 
     /**

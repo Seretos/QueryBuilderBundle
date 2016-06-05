@@ -9,8 +9,6 @@
 namespace database\QueryBuilderBundle\factory;
 
 
-use database\DriverBundle\connection\interfaces\ConnectionInterface;
-use database\QueryBuilderBundle\builder\QueryBuilder;
 use database\QueryBuilderBundle\model\DeleteModel;
 use database\QueryBuilderBundle\model\FromModel;
 use database\QueryBuilderBundle\model\GroupModel;
@@ -23,38 +21,8 @@ use database\QueryBuilderBundle\model\SelectModel;
 use database\QueryBuilderBundle\model\UpdateModel;
 use database\QueryBuilderBundle\model\ValuesModel;
 use database\QueryBuilderBundle\model\WhereModel;
-use database\QueryBundle\factory\QueryFactory;
-use database\QueryBundle\query\Query;
 
 class QueryBuilderFactory {
-    /**
-     * @var QueryFactory
-     */
-    private $queryFactory;
-
-    /**
-     * QueryBuilderFactory constructor.
-     *
-     * @param ConnectionInterface $connection
-     */
-    public function __construct (ConnectionInterface $connection) {
-        $this->queryFactory = new QueryFactory($connection);
-    }
-
-    /**
-     * @param QueryBuilder $builder
-     * @param array        $parameters
-     *
-     * @return Query
-     * @throws \database\QueryBuilderBundle\exception\QueryBuilderException
-     */
-    public function createQuery (QueryBuilder $builder, $parameters = []) {
-        $query = new Query($this->queryFactory, $builder->__toString());
-        $query->setParameters($parameters);
-
-        return $query;
-    }
-
     /**
      * @param $columns
      *

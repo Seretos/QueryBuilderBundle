@@ -23,7 +23,6 @@ use database\QueryBuilderBundle\model\SelectModel;
 use database\QueryBuilderBundle\model\UpdateModel;
 use database\QueryBuilderBundle\model\ValuesModel;
 use database\QueryBuilderBundle\model\WhereModel;
-use database\QueryBundle\query\Query;
 
 class QueryBuilder {
     const SELECT = 1;
@@ -269,7 +268,10 @@ class QueryBuilder {
      */
     public function andWhere ($condition) {
         $this->initWhere();
-        $this->where->add('AND '.$condition);
+        if ($this->where->count() > 0) {
+            $condition = 'AND '.$condition;
+        }
+        $this->where->add($condition);
 
         return $this;
     }
@@ -281,7 +283,10 @@ class QueryBuilder {
      */
     public function orWhere ($condition) {
         $this->initWhere();
-        $this->where->add('OR '.$condition);
+        if ($this->where->count() > 0) {
+            $condition = 'OR '.$condition;
+        }
+        $this->where->add($condition);
 
         return $this;
     }
@@ -405,12 +410,16 @@ class QueryBuilder {
         return $this;
     }
 
-    /**
-     * @return Query
-     */
-    public function buildQuery () {
-        return $this->factory->createQuery($this, $this->parameters);
+    public function getParameters () {
+        return $this->parameters;
     }
+
+//    /**
+//     * @return Query
+//     */
+//    public function buildQuery () {
+//        return $this->factory->createQuery($this, $this->parameters);
+//    }
 
     /**
      * @return string

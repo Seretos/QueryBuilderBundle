@@ -1,7 +1,8 @@
 <?php
 use database\DriverBundle\connection\mysqli\MysqliConnection;
-use database\QueryBuilderBundle\factory\QueryBuilderFactory;
+use database\QueryBuilderBundle\factory\QueryBuilderBundleFactory;
 use database\QueryBuilderBundle\tests\AbstractFunctionalQueryBuilderTest;
+use database\QueryBundle\factory\QueryBundleFactory;
 
 /**
  * Created by PhpStorm.
@@ -19,6 +20,6 @@ class MysqliFunctionalQueryBuilderTest extends AbstractFunctionalQueryBuilderTes
 
         $this->connection = new MysqliConnection($mysqli);
 
-        $this->queryBuilderFactory = new QueryBuilderFactory($this->connection);
+        $this->queryFactory = new QueryBundleFactory($this->connection);
     }
 }

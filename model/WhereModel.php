@@ -19,6 +19,10 @@ class WhereModel {
         $this->conditions = [];
     }
 
+    public function count () {
+        return count($this->conditions);
+    }
+
     /**
      * @param array $conditions
      */
