@@ -94,7 +94,21 @@ Road map
 ========
 the following features are not implemented but required for version 1.0
 
-* join with using
-* functions:
-    * GROUP_CONCAT
-    * IF
+```php
+//this code currently not exist!
+
+$expressionBuilder->mod(29,9);
+
+$expressionBuilder->distinct('column1');
+$expressionBuilder->distinct(['column1','column2']);
+
+$expressionBuilder->between('column',':start',':end');
+
+$expressionBuilder->count('column1');
+$expressionBuilder->count($expressionBuilder->distinct('column1'));
+
+$expressionBuilder->avg($expressionBuilder->distinct('column1'));
+
+$expressionBuilder->min('column1');
+$expressionBuilder->max('column1');
+```
